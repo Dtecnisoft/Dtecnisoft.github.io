@@ -1,0 +1,505 @@
+body::-webkit-scrollbar {
+    width: 8px;
+
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 50px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #d3fdf7;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column; /* Organiza los elementos en columna */
+    align-items: center; /* Centra el logo horizontalmente */
+    padding: 8px; /* Espaciado alrededor del contenedor */
+    background-color: #fff; /* Color de fondo (opcional) */
+    border-radius: 0 0 20px 20px ; /* Bordes redondeados solo en la parte inferior */
+}
+
+.usu{
+    width: 200px;
+}
+
+/*menu desplegable*/
+.menu {
+    position: relative;
+    align-self: flex-start;
+}
+
+.menu-toggle {
+    background-color: #e2fcf9; /* Color del botón */
+    color: black; /* Color del texto */
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px; /* Bordes redondeados para el botón */
+    font-size: 23px;
+}
+
+.menu-items {
+    display: none; /* Ocultar el menú por defecto */
+    position: absolute;
+    background-color: white; /* Fondo del menú */
+    list-style-type: none;
+    padding: 0;
+    margin-left: 10px;
+    border: 1px solid #fff; /* Borde del menú */
+    border-radius: 5px; /* Bordes redondeados para el menú */
+    z-index: 1000; /* Asegurar que el menú esté por encima de otros elementos */
+    width: 200px;
+    height: 250px;
+}
+
+.menu-items li {
+    padding: 10px;
+}
+
+.menu-items li a {
+    text-decoration: none; /* Sin subrayado */
+    color: black; /* Color del texto */
+}
+
+.menu-items li:hover {
+    background-color: #e2fcf9; /* Color de fondo al pasar el ratón */
+}
+
+.menu-toggle:focus + .menu-items,
+.menu-items:hover {
+    display: block; /* Mostrar el menú al hacer clic o al pasar el ratón */
+}
+
+.titulo {
+    font-size: 15px;
+    padding: 6px;
+    text-align: center;
+}
+
+.error-message{
+    color: red; display: none;
+}
+
+.imglogo {
+    width: 90px;
+    height: auto;
+    margin-top: -50px;
+}
+
+
+/*Contenedor*/
+.container {
+    max-width: 1900px;
+    margin: 10 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+/*contenedor 2*/
+.input-container {
+    background: white;
+    padding: 8px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.results-container {
+    background: white;
+    padding: 5px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+h1,
+h2,h3,h4,h5 {
+    color: #000;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+
+.section {
+    margin-bottom: 20px;
+    padding: 18px;
+    background: #e2fcf9;
+    border-radius: 10px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000;
+    font-weight: 500;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.results {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.total {
+    font-size: 24px;
+    color: #27ae60;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.expenses-total {
+    font-size: 24px;
+    color: #e74c3c;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.balance {
+    font-size: 24px;
+    color: #2c3e50;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.calculate-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.calculate-btn:hover {
+    background: #2980b9;
+}
+
+/*boton para generar informe*/
+.generate-btn {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.generate-btn:hover {
+    background: #2980b9;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd;
+    /* Borde alrededor de toda la tabla */
+}
+
+.history-table th,
+.history-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.history-table th {
+    background-color: #e2fcf9;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.history-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.history-table tr:last-child {
+    border-top: 2px solid #ddd;
+}
+
+.mod {
+    background-color: #4CAF50;
+    /* Color de fondo verde */
+    color: white;
+    /* Color del texto blanco */
+    border: none;
+    /* Sin borde */
+    padding: 5px;
+    /* Espaciado interno */
+    text-align: center;
+    /* Centrar texto */
+    text-decoration: none;
+    /* Sin subrayado */
+    display: inline-block;
+    /* Mostrar como bloque en línea */
+    font-size: 20px;
+    /* Tamaño de fuente */
+    cursor: pointer;
+    /* Cambiar cursor al pasar el mouse */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s;
+    /* Transición suave para el color de fondo */
+}
+
+.mod:hover {
+    background-color: #45a049;
+    /* Color de fondo al pasar el mouse */
+}
+
+.remove {
+    background-color: #d33;
+    /* Color de fondo verde */
+    color: white;
+    /* Color del texto blanco */
+    border: none;
+    /* Sin borde */
+    padding: 5px;
+    /* Espaciado interno */
+    text-align: center;
+    /* Centrar texto */
+    text-decoration: none;
+    /* Sin subrayado */
+    display: inline-block;
+    /* Mostrar como bloque en línea */
+    font-size: 20px;
+    /* Tamaño de fuente */
+    cursor: pointer;
+    /* Cambiar cursor al pasar el mouse */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s;
+    /* Transición suave para el color de fondo */
+}
+
+.remove:hover {
+    background-color: #000;
+    /* Color de fondo al pasar el mouse */
+}
+
+footer {
+    background-color: #f8f9fa; /* Color de fondo */
+    text-align: center; /* Alineación centrada */
+    padding: 10px; /* Espaciado interno */
+    position: relative; /* Posicionamiento */
+    bottom: 0; /* Fijar en la parte inferior */
+    width: 100%; /* Ancho completo */
+}
+
+footer p {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.error {
+    border-color: #e74c3c !important;
+}
+
+.nav-buttons {
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .history-table {
+        border: 0;
+    }
+
+    .history-table thead {
+        display: table-header-group;
+        /* Mantiene el encabezado visible */
+        font-size: 8px;
+        /* Ajusta el tamaño del texto para pantallas pequeñas */
+    }
+
+    .history-table th {
+        padding: 1px;
+        /* Reduce el padding para optimizar el espacio */
+        margin: 0;
+        /* Asegúrate de que no haya margen adicional */
+        font-size: 10px;
+        /* Ajusta el tamaño de los encabezados */
+    }
+
+    .history-table tr {
+        display: table-row;
+        margin-bottom: 0;
+        box-shadow: none;
+    }
+
+    .history-table td {
+        display: table-cell;
+        text-align: left;
+        padding: 3px;
+        /* Reduce el padding en las celdas */
+        border-bottom: 1px solid #ddd;
+        position: relative;
+        font-size: 10px;
+        /* Ajusta el tamaño del texto de las celdas */
+    }
+
+    .history-table td:last-child {
+        border-bottom: 0;
+    }
+
+    .mod,
+    .remove {
+        font-size: 12px;
+        /* Tamaño de fuente */
+    }
+
+   /*eventos de los botones*/
+    .nav-buttons {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        padding: 10px;
+        display: flex;
+        justify-content: space-around;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+    
+    .nav-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 8px 20px;
+        border: none;
+        background: none;
+        color: #000;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+    .nav-btn.active {
+        color: #3498db;
+    }
+    
+    .nav-btn svg {
+        width: 24px;
+        height: 24px;
+        margin-bottom: 4px;
+    }
+    
+    .nav-btn span {
+        font-size: 12px;
+    }
+    
+    .section-container {
+        display: none;
+    }
+    
+    .section-container.active {
+        display: block;
+    }
+    .status-bar {
+        background: #3498db;
+        color: white;
+        padding: 10px 20px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .status-bar h1 {
+        margin: 0;
+        font-size: 20px;
+        color: white;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .history-table th,
+    .history-table td {
+        font-size: 8px;
+        /* Reduce el tamaño de la fuente en pantallas pequeñas */
+        padding: 2px;
+        /* Reduce el padding para optimizar el espacio */
+    }
+
+    .usu{
+        width: 92%;
+    }
+
+}

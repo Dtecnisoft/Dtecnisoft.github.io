@@ -1,0 +1,64 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetD Informe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="menu">
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="menu-items">
+                    <li><b><div id="usuario"></div></b></li>
+                    <li><a href="principal.html"><i class="bi bi-house"></i> Inicio</a></li>
+                    <li><a href="informe.html"><i class="bi bi-bar-chart"></i> Informes</a></li>
+                    <li><a href="#ajustes"><i class="bi bi-gear"></i> Ajustes</a></li>
+                    <li><a href="#cerrar-sesion" onclick="cerrarSesion()"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a></li>
+                </ul>
+            </div>
+            
+            <span class="usu">Hola,<div id="usuarioHeader"></div></span>
+        </div>
+    </header>
+
+
+    <div class="container">
+        
+        <div class="results-container">
+            <h3>Informes</h3>
+        
+            <button class="generate-btn" id="generateReportButton" onclick="generateExcelReport()" aria-label="Generar informe en formato Excel">Generar Informe Excel</button>
+            <button class="generate-btn" id="generateReportButton" onclick="generatePDFReport()" aria-label="Generar informe en formato PDF">Generar Informe PDF</button>
+        </div>
+
+    </div>
+
+
+    
+    <footer>
+        <p>Diseño y desarrollo por <a href="https://www.linkedin.com/in/diego-alonso-bola%C3%B1os-6b3b91159/" target="_blank">Diego Bolaños</a></p>
+        <p>© 2025</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/base.js"></script>
+    <script src="js/login.js"></script>
+</body>
+
+</html>

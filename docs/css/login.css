@@ -1,0 +1,32 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background: white; /* Fondo blanco */
+}
+
+.login-form {
+    background-color: white; /* Fondo blanco */
+    padding: 10px; /* Espaciado interno */
+
+}
+.img-fluid{
+    max-width: 130px;
+}
+
+.form-control {
+    border-radius: 10px; /* Bordes redondeados para los campos de entrada */
+}
+
+.title{
+    margin-top: -40px;
+    font-size: 15px;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-radius: 10px; /* Bordes redondeados para el botón */
+}
+
+#createUser{
+    width: 100%; /* Hacer que el botón ocupe todo el ancho */
+}

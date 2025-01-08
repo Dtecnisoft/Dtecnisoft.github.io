@@ -1,0 +1,296 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="menu">
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="menu-items">
+                    <li>
+                        <b><div id="usuario"></div></b>
+                    </li>
+                    <li><a href="principal.html"><i class="bi bi-house"></i> Inicio</a></li>
+                    <li><a href="informe.html"><i class="bi bi-bar-chart"></i> Informes</a></li>
+                    <li><a href="#ajustes"><i class="bi bi-gear"></i> Ajustes</a></li>
+                    <li><a href="#cerrar-sesion" onclick="cerrarSesion()"><i class="bi bi-box-arrow-right"></i> Cerrar
+                            sesión</a></li>
+                </ul>
+            </div>
+         
+            <span class="usu">Hola,<div id="usuarioHeader"></div></span>
+        </div>
+    </header>
+
+    <div class="nav-buttons">
+        <button class="nav-btn active" data-section="income-section" onclick="showSection('income-section')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z" />
+            </svg>
+            <span>Ingresos</span>
+        </button>
+        <button class="nav-btn" data-section="expenses-section" onclick="showSection('expenses-section')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12.5 6.9c1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-.53.12-1.03.3-1.48.54l1.47 1.47c.41-.17.91-.27 1.51-.27zM5.33 4.06L4.06 5.33 7.5 8.77c0 2.08 1.56 3.21 3.91 3.91l3.51 3.51c-.34.48-1.05.91-2.42.91-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c.96-.18 1.82-.55 2.45-1.12l2.22 2.22 1.27-1.27L5.33 4.06z" />
+            </svg>
+            <span>Gastos</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <div id="income-section" class="section-container active">
+            <div class="input-container">
+                <h5>Ingresos Mensuales</h5>
+                <div class="section">
+                    <div class="input-group">
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name">
+                    </div>
+                    <div class="input-group">
+                        <label for="month">Mes:</label>
+                        <select id="month">
+                            <option value="Enero">Enero</option>
+                            <option value="Febrero">Febrero</option>
+                            <option value="Marzo">Marzo</option>
+                            <option value="Abril">Abril</option>
+                            <option value="Mayo">Mayo</option>
+                            <option value="Junio">Junio</option>
+                            <option value="Julio">Julio</option>
+                            <option value="Agosto">Agosto</option>
+                            <option value="Septiembre">Septiembre</option>
+                            <option value="Octubre">Octubre</option>
+                            <option value="Noviembre">Noviembre</option>
+                            <option value="Diciembre">Diciembre</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="salary">Salario Mensual:</label>
+                        <input type="text" id="salary">
+                        <span id="salaryError" class="error-message"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="additional">Ingresos Adicionales:</label>
+                        <input type="text" id="additional">
+                        <span id="additionalError" class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="expenses-section" class="section-container">
+            <div class="input-container">
+                <h5>Gastos Mensuales</h5>
+                <div class="section">
+                    <div class="input-group">
+                        <label for="savings">Ahorro:</label>
+                        <input type="text" id="savings">
+                        <span id="savingsError" class="error-message"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="emergency">Fondo de Emergencia:</label>
+                        <input type="text" id="emergency">
+                        <span id="emergencyError" class="error-message"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="rent">Arriendo:</label>
+                        <input type="text" id="rent">
+                        <span id="rentError" class="error-message"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="food">Alimentos:</label>
+                        <input type="text" id="food">
+                        <span id="foodError" class="error-message"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="utilities">Servicios Públicos:</label>
+                        <input type="text" id="utilities">
+                        <span id="utilitiesError" class="error-message"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="transport">Transporte:</label>
+                        <input type="text" id="transport">
+                        <span id="transportError" class="error-message"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="insurance">Seguros:</label>
+                        <input type="text" id="insurance">
+                        <span id="insuranceError" class="error-message"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="others">Otros Gastos:</label>
+                        <input type="text" id="others">
+                        <span id="othersError" class="error-message"></span>
+                    </div>
+                </div>
+
+
+                <button class="calculate-btn" onclick="calculateBudget()">Calcular Presupuesto</button>
+            </div>
+        </div>
+
+        <div class="results-container">
+            <h5>Resultados</h5>
+            <div class="results" id="results">
+                <div id="monthResult"></div>
+                <div id="summary"></div>
+                <div class="total" id="total"></div>
+                <div id="expensesSummary"></div>
+                <div class="expenses-total" id="expensesTotal"></div>
+                <div class="balance" id="balance"></div>
+            </div>
+
+            <div class="table-container">
+                <h5>Historial de Registros</h5>
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Mes</th>
+                            <th>Nombre</th>
+                            <th>Ingresos</th>
+                            <th>Gastos</th>
+                            <th>Ahorro</th>
+                            <th>Balance</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+
+                    </tbody>
+                </table>
+            </div>
+            <button class="calculate-btn" style="margin-top: 20px; background-color: #d33;"
+                onclick="resetRecords()">Eliminar Registros</button>
+        </div>
+
+    </div>
+
+
+    <div class="container mt-3">
+        <!-- Modal -->
+        <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modificar Registro</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form id="editForm">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="recordName">Nombre:</label>
+                                    <input type="text" id="recordName" disabled class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="monthToModify">Mes:</label>
+                                    <input type="text" id="monthToModify" disabled class="form-control">
+                                </div>
+                                <div class="col">
+                                    <label for="newSalary">Salario:</label>
+                                    <input type="text" id="newSalary" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <label for="newAdditional">Ingr.Adicionales:</label>
+                                    <input type="text" id="newAdditional" class="form-control">
+                                </div>
+                                <div class="col">
+                                    <label for="newSavings">Ahorro:</label>
+                                    <input type="text" id="newSavings" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="newEmergency">Fond.Emergencia:</label>
+                                    <input type="text" id="newEmergency" class="form-control">
+                                </div>
+                                <div class="col">
+                                    <label for="newRent">Arriendo:</label>
+                                    <input type="text" id="newRent" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="newFood">Alimentos:</label>
+                                    <input type="text" id="newFood" class="form-control">
+                                </div>
+                                <div class="col">
+                                    <label for="newUtilities">Servicios Públicos:</label>
+                                    <input type="text" id="newUtilities" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="newTransport">Transporte:</label>
+                                    <input type="text" id="newTransport" class="form-control">
+                                </div>
+                                <div class="col">
+                                    <label for="newInsurance">Seguros:</label>
+                                    <input type="text" id="newInsurance" class="form-control">
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="newOthers">Otros Gastos:</label>
+                                        <input type="text" id="newOthers" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="modal-footer">
+                            <button type="button" onclick="closeEditForm()" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" onclick="saveModifiedRecord()" class="btn btn-primary"
+                                data-bs-dismiss="modal">Guardar
+                                Cambios</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Diseño y desarrollo por <a href="https://www.linkedin.com/in/diego-alonso-bola%C3%B1os-6b3b91159/" target="_blank">Diego Bolaños</a></p>
+        <p>© 2025</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/base.js"></script>
+    <script src="js/login.js"></script>
+</body>
+
+</html>
