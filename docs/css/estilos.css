@@ -19,13 +19,13 @@ body {
     min-height: 100vh;
 }
 
+
 .header-container {
     display: flex;
     flex-direction: column; /* Organiza los elementos en columna */
     align-items: center; /* Centra el logo horizontalmente */
-    padding: 8px; /* Espaciado alrededor del contenedor */
     background-color: #fff; /* Color de fondo (opcional) */
-    border-radius: 0 0 20px 20px ; /* Bordes redondeados solo en la parte inferior */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
 }
 
 .usu{
@@ -34,8 +34,57 @@ body {
 }
 
 .Total-ahorro{
-    margin-top: -30px;
+    margin-top: 8px;
     font-weight: 600;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background-color: #fff; /* Color de fondo de la barra de herramientas */
+    border-bottom: 1px solid #ddd; /* Borde inferior para separar la barra de herramientas del contenido */
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.notification-icon {
+    position: relative;
+    margin-left: auto; /* Mueve el ícono a la derecha */
+    font-size: 20px;
+    color: #000; /* Color del ícono */
+    cursor: pointer;
+    left: -10px;
+}
+
+.notification-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #e74c3c; /* Color de fondo del contador */
+    color: white; /* Color del texto del contador */
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 50%; /* Hace que el contador sea circular */
+}
+
+.help-button button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #000;
+    cursor: pointer;
+}
+
+.help-button button:hover {
+    color: #e2fcf9;
 }
 
 /*menu desplegable*/
