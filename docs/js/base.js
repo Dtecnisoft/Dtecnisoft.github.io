@@ -16,23 +16,12 @@ document.addEventListener('click', function (event) {
     }
 });
 
-// **Muestra el tiempo del icono de la App**
-document.addEventListener('deviceready', function () {
-    // Asegúrate de que el splash se oculta después de 3 segundos
-    setTimeout(function () {
-        navigator.splashscreen.hide();
-    }, 3000);
-}, false);
-
 
 //**Funcion para los eventos de botonoes ingresos y gastos**
 
 function showSection(sectionId) {
-    document.querySelectorAll('.section-container').forEach(container => {
-        container.classList.remove('active');
-    });
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('active');
+    document.querySelectorAll('.section-container, .nav-btn').forEach(element => {
+        element.classList.remove('active');
     });
 
     document.getElementById(sectionId).classList.add('active');
@@ -53,32 +42,33 @@ document.querySelectorAll('input[type="text"]').forEach(input => {
 let budgetHistory = JSON.parse(localStorage.getItem('budgetHistory')) || [];
 
 // **Excepciones para Campos de Entrada**
-
 function setupInputValidation(inputId, errorId, errorMessage) {
-    document.getElementById(inputId).addEventListener('input', function (e) {
-        const errorMessageElement = document.getElementById(errorId);
-        this.value = this.value.replace(/[^0-9]/g, '');
+    const input = document.getElementById(inputId);
+    const errorMessageElement = document.getElementById(errorId);
 
-        if (this.value === '') {
-            errorMessageElement.textContent = errorMessage;
-            errorMessageElement.style.display = 'block';
-        } else {
-            errorMessageElement.style.display = 'none';
-        }
+    input.addEventListener('input', () => {
+        input.value = input.value.replace(/[^0-9]/g, '');
+        errorMessageElement.style.display = input.value === '' ? 'block' : 'none';
+        errorMessageElement.textContent = errorMessage;
     });
 }
 
 // Configuración de validaciones para cada campo
-setupInputValidation('salary', 'salaryError', 'En el campo de salario solo se permiten números.');
-setupInputValidation('additional', 'additionalError', 'En el campo de ingresos adicionales solo se permiten números.');
-setupInputValidation('savings', 'savingsError', 'En el campo de Ahorro solo se permiten números.');
-setupInputValidation('emergency', 'emergencyError', 'En el campo de Fondo de Emergencia solo se permiten números.');
-setupInputValidation('rent', 'rentError', 'En el campo de Arriendo solo se permiten números.');
-setupInputValidation('food', 'foodError', 'En el campo de Alimentos solo se permiten números.');
-setupInputValidation('utilities', 'utilitiesError', 'En el campo de Servicios Públicos solo se permiten números.');
-setupInputValidation('transport', 'transportError', 'En el campo de Transporte solo se permiten números.');
-setupInputValidation('insurance', 'insuranceError', 'En el campo de Seguros solo se permiten números.');
-setupInputValidation('others', 'othersError', 'En el campo de Otros Gastos solo se permiten números.');
+const fields = [
+    { id: 'salary', errorId: 'salaryError', message: 'En el campo de salario solo se permiten números.' },
+    { id: 'additional', errorId: 'additionalError', message: 'En el campo de ingresos adicionales solo se permiten números.' },
+    { id: 'savings', errorId: 'savingsError', message: 'En el campo de Ahorro solo se permiten números.' },
+    { id: 'emergency', errorId: 'emergencyError', message: 'En el campo de Fondo de Emergencia solo se permiten números.' },
+    { id: 'rent', errorId: 'rentError', message: 'En el campo de Arriendo solo se permiten números.' },
+    { id: 'food', errorId: 'foodError', message: 'En el campo de Alimentos solo se permiten números.' },
+    { id: 'utilities', errorId: 'utilitiesError', message: 'En el campo de Servicios Públicos solo se permiten números.' },
+    { id: 'transport', errorId: 'transportError', message: 'En el campo de Transporte solo se permiten números.' },
+    { id: 'insurance', errorId: 'insuranceError', message: 'En el campo de Seguros solo se permiten números.' },
+    { id: 'others', errorId: 'othersError', message: 'En el campo de Otros Gastos solo se permiten números.' }
+];
+
+fields.forEach(field => setupInputValidation(field.id, field.errorId, field.message));
+
 
 function parseFormattedNumber(value) {
     if (!value) return 0;
@@ -192,6 +182,9 @@ function calculateBudget() {
     void document.getElementById('results').offsetWidth; // Trigger reflow
     document.getElementById('results').classList.add('fade-in');
 
+    // Actualizar el total de ahorros en el header
+    updateTotalSavingsInHeader();
+
 }
 
 // Historial
@@ -282,6 +275,9 @@ function deleteRecord(index) {
             });
         }
     });
+
+    // Actualizar el total de ahorros en el header
+    updateTotalSavingsInHeader();
 }
 
 // Función para modificar el registro
@@ -304,6 +300,9 @@ function modifyRecord(index) {
 
     // Mostrar el formulario
     document.getElementById('editForm').style.display = 'block';
+
+    // Actualizar el total de ahorros en el header
+    updateTotalSavingsInHeader();
 }
 
 //se Implementa la función saveModifiedRecord para guardar los cambios realizados en el registro
@@ -443,6 +442,53 @@ document.addEventListener('keypress', function (event) {
 updateHistoryTable();
 
 
+//*Función para calcular y mostrar el total de ahorros/
+function updateTotalSavingsInHeader() {
+    // Calcular el total de ahorros
+    const totalSavingsSum = budgetHistory.reduce((sum, record) => {
+        return sum + (record.totalSavings || 0);
+    }, 0);
+
+    // Guardar el total de ahorros en localStorage
+    localStorage.setItem('totalSavingsSum', totalSavingsSum);
+
+    // Formatear el número con separadores de miles
+    const formattedTotalSavings = formatNumber(totalSavingsSum);
+
+    // Seleccionar el elemento del header donde se mostrará el total de ahorros
+    const totalSavingsElement = document.getElementById('totalSavingsHeader');
+
+    // Actualizar el contenido del elemento con el total de ahorros
+    if (totalSavingsElement) {
+        totalSavingsElement.textContent = `Total Ahorros: $${formattedTotalSavings}`;
+    }
+
+    // Disparar un evento personalizado para notificar a otras páginas
+    const event = new CustomEvent('totalSavingsUpdated', {
+        detail: { totalSavings: formattedTotalSavings }
+    });
+    window.dispatchEvent(event);
+}
+
+//*Recuperar el total de ahorros al cargar cada página/
+document.addEventListener('DOMContentLoaded', function () {
+    // Recuperar el total de ahorros desde localStorage
+    const totalSavingsSum = localStorage.getItem('totalSavingsSum') || 0;
+
+    // Formatear el número con separadores de miles
+    const formattedTotalSavings = formatNumber(totalSavingsSum);
+
+    // Seleccionar el elemento del header donde se mostrará el total de ahorros
+    const totalSavingsElement = document.getElementById('totalSavingsHeader');
+
+    // Actualizar el contenido del elemento con el total de ahorros
+    if (totalSavingsElement) {
+        totalSavingsElement.textContent = `Total Ahorros: $${formattedTotalSavings}`;
+    }
+});
+
+
+//*Funcion para exportar en archivo Excel /
 function generateExcelReport() {
     // Verificar si hay registros
     if (budgetHistory.length === 0) {
