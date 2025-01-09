@@ -16,6 +16,9 @@ document.addEventListener('click', function (event) {
     }
 });
 
+function irASoporte() {
+    window.location.href = "soporte.html"; // Redirige a la página de soporte
+}
 
 //**Funcion para los eventos de botonoes ingresos y gastos**
 
