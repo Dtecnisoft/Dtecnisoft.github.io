@@ -178,6 +178,7 @@ function iniciarSesion(event) {
 }
 
 
+
 // **Funciones de Manejo de Sesión**
 function cerrarSesion() {
     // Eliminar el usuario de localStorage (si lo usas temporalmente)
