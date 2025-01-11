@@ -16,9 +16,27 @@ document.addEventListener('click', function (event) {
     }
 });
 
-function irASoporte() {
+function soporte() {
     window.location.href = "soporte.html"; // Redirige a la página de soporte
 }
+
+
+// Referencias a los elementos
+const notificationIcon = document.getElementById('notification-icon');
+const notificationMenu = document.getElementById('notification-menu');
+
+// Agregar evento de clic al icono
+notificationIcon.addEventListener('click', () => {
+    notificationMenu.classList.toggle('active');
+});
+
+// Cerrar el menú si se hace clic fuera de él
+document.addEventListener('click', (event) => {
+    if (!notificationIcon.contains(event.target) && !notificationMenu.contains(event.target)) {
+        notificationMenu.classList.remove('active');
+    }
+});
+
 
 //**Funcion para los eventos de botonoes ingresos y gastos**
 
