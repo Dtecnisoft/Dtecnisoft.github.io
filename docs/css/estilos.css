@@ -19,18 +19,18 @@ body {
     min-height: 100vh;
 }
 
-
 .header-container {
     display: flex;
     flex-direction: column; /* Organiza los elementos en columna */
     align-items: center; /* Centra el logo horizontalmente */
     background-color: #fff; /* Color de fondo (opcional) */
     box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    border-radius: 0 0 20px 20px ; /* Bordes redondeados solo en la parte inferior */
 }
 
 .usu{
     width: 200px;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .Total-ahorro{
@@ -48,20 +48,21 @@ body {
 }
 
 .logo {
-    width: 80px;
+    width: 90px;
     height: auto;
     display: block;
     margin-left: auto;
+   
 }
-
 
 .notification-icon {
     position: relative;
     margin-left: auto; /* Mueve el ícono a la derecha */
-    font-size: 20px;
+    font-size: 23px;
     color: #000; /* Color del ícono */
     cursor: pointer;
     left: -10px;
+    display: inline-block;
 }
 
 .notification-count {
@@ -75,16 +76,53 @@ body {
     border-radius: 50%; /* Hace que el contador sea circular */
 }
 
+/* Estilo del menú desplegable */
+        .notification-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .notification-menu.active {
+            display: block;
+        }
+
+        .notification-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .notification-menu ul li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .notification-menu ul li:last-child {
+            border-bottom: none;
+        }
+
+        .notification-menu ul li:hover {
+            background-color: #f9f9f9;
+        }
+
 .help-button button {
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: 23px;
     color: #000;
     cursor: pointer;
 }
 
 .help-button button:hover {
-    color: #e2fcf9;
+    color: #000;
 }
 
 /*menu desplegable*/
@@ -97,9 +135,9 @@ body {
     background-color: #e2fcf9; /* Color del botón */
     color: black; /* Color del texto */
     border: none;
-    padding: 10px;
-    margin-top: 10px;
-    margin-left: 10px;
+    padding: 8px;
+    margin-top: 2px;
+    margin-left: 8px;
     cursor: pointer;
     border-radius: 5px; /* Bordes redondeados para el botón */
     font-size: 23px;
@@ -111,7 +149,7 @@ body {
     background-color: white; /* Fondo del menú */
     list-style-type: none;
     padding: 0;
-    margin-left: 10px;
+    margin-left: 8px;
     border: 1px solid #fff; /* Borde del menú */
     border-radius: 5px; /* Bordes redondeados para el menú */
     z-index: 1000; /* Asegurar que el menú esté por encima de otros elementos */
