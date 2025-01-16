@@ -1,3 +1,4 @@
+
 // Validación en JavaScript con SweetAlert2
 document.getElementById('contactForm').addEventListener('submit', function (event) {
     let isValid = true;
@@ -44,20 +45,33 @@ document.getElementById('contactForm').addEventListener('submit', function (even
     }
 
     // Prevenir el Envío del Formulario si es Inválido
-    if (!isValid) {
-        event.preventDefault();
-        Swal.fire({
-            title: 'Error',
-            text: 'Por favor, corrige los errores en el formulario.',
-        });
-    } else {
-        event.preventDefault(); // Prevenir el envío automático del formulario para demostración
+if (!isValid) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Error',
+        text: 'Por favor, corrige los errores en el formulario.',
+    });
+} else {
+    event.preventDefault();
+    emailjs.send("service_1uejyyc", "template_ni9mlse", {
+        name: name.value,
+        email: email.value,
+        subject: subject.value,
+        message: message.value
+    }).then(function () {
         Swal.fire({
             title: '¡Formulario enviado!',
             text: 'Tu mensaje ha sido enviado correctamente.',
-        }).then(() => {
-            // Opcionalmente, puedes enviar el formulario programáticamente aquí
-            // document.getElementById('contactForm').submit();
         });
-    }
+    }).catch(function (error) {
+        Swal.fire({
+            title: 'Error',
+            text: 'Hubo un problema al enviar el mensaje. Intenta nuevamente.',
+        });
+    });
+}
+
 });
+
+
+
