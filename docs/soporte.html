@@ -43,15 +43,16 @@
                 <img src="img/BudgetD.png" alt="Logo de la aplicación" class="logo">
                 <!-- Icono de notificaciones -->
                 <span class="notification-icon" id="notification-icon">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-count" id="notification-count">2</span> <!-- Número de notificaciones -->
+                <i class="fas fa-bell"></i>
+                <span class="notification-count" id="notification-count">0</span>
                 </span>
 
+                <!-- Menú de notificaciones -->
                 <div class="notification-menu" id="notification-menu">
-                    <ul>
-                        <li>Hay nueva actualización</li>
-                        <li>Hay nueva actualización</li>
-                    </ul>
+                 <ul id="notification-list">
+                <!-- Las notificaciones se agregarán aquí dinámicamente -->
+                </ul>
+               <button id="mark-all-read">Marcar todas como leídas</button>
                 </div>
                 <div class="help-button">
                     <button onclick="soporte()">
@@ -108,20 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            ¿Qué hago si olvidé mi contraseña?
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            Haz clic en "¿Olvidaste tu contraseña?" en la pantalla de inicio de sesión y sigue los pasos para restablecerla.
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
 
@@ -173,6 +161,12 @@
     <script src="js/base.js"></script>
     <script src="js/login.js"></script>
     <script src="js/soporte.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+    emailjs.init("service_1uejyyc"); // Reemplaza con tu User ID
+    emailjs.init("qrMRx9gco9mWfIlRu"); // Reemplaza  con tu clave pública real
+    </script>
+
 </body>
 
 </html>
