@@ -39,17 +39,18 @@
                 <img src="img/BudgetD.png" alt="Logo de la aplicación" class="logo">
                 <!-- Icono de notificaciones -->
                 <span class="notification-icon" id="notification-icon">
-                 <i class="fas fa-bell"></i>
-                <span class="notification-count" id="notification-count">2</span> <!-- Número de notificaciones -->
-                 </span>
+                <i class="fas fa-bell"></i>
+                <span class="notification-count" id="notification-count">0</span>
+                </span>
 
+                <!-- Menú de notificaciones -->
                 <div class="notification-menu" id="notification-menu">
-                <ul>
-                <li>Hay nueva actualización</li>
-                <li>Hay nueva actualización</li>
-                
+                 <ul id="notification-list">
+                <!-- Las notificaciones se agregarán aquí dinámicamente -->
                 </ul>
+               <button id="mark-all-read">Marcar todas como leídas</button>
                 </div>
+
 
                 <div class="help-button">
                     <button onclick="soporte()">
