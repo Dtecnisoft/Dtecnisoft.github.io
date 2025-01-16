@@ -24,18 +24,66 @@ function soporte() {
 // Referencias a los elementos
 const notificationIcon = document.getElementById('notification-icon');
 const notificationMenu = document.getElementById('notification-menu');
+const notificationCount = document.getElementById('notification-count');
+const notificationList = document.getElementById('notification-list');
+const markAllReadButton = document.getElementById('mark-all-read');
 
-// Agregar evento de clic al icono
+// Datos simulados de notificaciones
+const notifications = [
+  { id: 1, text: '¡Hay nueva actualización!', read: false },
+  { id: 2, text: 'Evento programado para mañana 5:00 AM', read: false }
+];
+
+// Función para actualizar el menú de notificaciones
+function updateNotifications() {
+  // Limpiar lista de notificaciones
+  notificationList.innerHTML = '';
+  
+  // Agregar notificaciones
+  notifications.forEach(notification => {
+    const listItem = document.createElement('li');
+    listItem.textContent = notification.text;
+    listItem.classList.add(notification.read ? 'read' : 'unread');
+    listItem.dataset.id = notification.id;
+    listItem.addEventListener('click', () => markAsRead(notification.id));
+    notificationList.appendChild(listItem);
+  });
+  
+  // Actualizar el contador de notificaciones
+  const unreadCount = notifications.filter(notification => !notification.read).length;
+  notificationCount.textContent = unreadCount;
+  notificationCount.style.display = unreadCount > 0 ? 'inline' : 'none';
+}
+
+// Función para marcar una notificación como leída
+function markAsRead(id) {
+  const notification = notifications.find(n => n.id === id);
+  if (notification) {
+    notification.read = true;
+    updateNotifications();
+  }
+}
+
+// Marcar todas como leídas
+markAllReadButton.addEventListener('click', () => {
+  notifications.forEach(notification => notification.read = true);
+  updateNotifications();
+});
+
+// Alternar menú de notificaciones
 notificationIcon.addEventListener('click', () => {
-    notificationMenu.classList.toggle('active');
+  notificationMenu.classList.toggle('active');
 });
 
 // Cerrar el menú si se hace clic fuera de él
 document.addEventListener('click', (event) => {
-    if (!notificationIcon.contains(event.target) && !notificationMenu.contains(event.target)) {
-        notificationMenu.classList.remove('active');
-    }
+  if (!notificationIcon.contains(event.target) && !notificationMenu.contains(event.target)) {
+    notificationMenu.classList.remove('active');
+  }
 });
+
+// Inicializar
+updateNotifications();
 
 
 //**Funcion para los eventos de botonoes ingresos y gastos**
